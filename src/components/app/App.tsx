@@ -1,30 +1,30 @@
-
-import Test from '../testComponent/Test';
-import Loader from '../loader/Loader';
-import Error from '../error/Error';
-
-
-import { useProductsHttp } from '../../hooks/htttp.products';
-
+import { Route, Routes } from 'react-router-dom'
+import ProductPage from '../pages/ProductPage';
+import AboutPage from '../pages/AboutPage';
+import Navigation from '../navigation/Navigation';
 
 
 function App() {
-
-	const {product, loading, error} = useProductsHttp()
-
 	return (
-		<div className='container mx-auto max-w-2xl pt-5'>
-			{loading && <Loader/>}
-			{error && <Error/>}
-			{product.map(product => <Test products={product} key={product.id} />)}
-		</div>
+
+		<>
+
+			<Navigation />
+			<Routes>
+				<Route path='/' element={<ProductPage />} />
+				<Route path='/about' element={<AboutPage />} />
+
+			</Routes>
+
+		</>
+
 	)
+
 }
 
 export default App;
 
 
 
-// 1:03:36
 
 

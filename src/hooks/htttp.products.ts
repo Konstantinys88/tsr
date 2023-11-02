@@ -6,18 +6,23 @@ export const useProductsHttp = () => {
 
     const [product, setProduct] = useState<IProduct[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState('');
+
+    const addProduct = (product: IProduct) => {
+        setProduct(prev => [...prev, product])
+    }
 
 
     const fetchProducts = async () => {
         try {
+            setError('')
             setLoading(true);
-            const respons = await axios.get<IProduct[]>('https://fakestoreapi.com/products?limit=5');
+            const respons = await axios.get<IProduct[]>('https://fakestoreapi.com/products/category/jewelery?limit=5');
             setProduct(respons.data);
             setLoading(false);
         } catch (e: unknown) {
             setLoading(false);
-            setError(true)
+            setError('Error data')
         }
     }
 
@@ -31,6 +36,7 @@ export const useProductsHttp = () => {
         product,
         loading,
         error,
+        addProduct,
     }
 
 }
